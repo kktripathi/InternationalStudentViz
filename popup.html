@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Int. Studnt. Get started with PopupTemplate - 4.3</title>
+  <link rel="icon" type="image/png" href="Geovis_v4.png" sizes="96x96">
+  <!-- ArcGIS API for JavaScript CSS-->
+  <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+  <!-- Web Framework CSS - Bootstrap (getbootstrap.com) and Bootstrap-map-js (github.com/esri/bootstrap-map-js) -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="//esri.github.io/bootstrap-map-js/src/css/bootstrapmap.css">
+    
+  <style>
+    html,
+    body,
+    #viewDiv 
+    {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+    
+  
+  <!-- ArcGIS API for JavaScript library references -->
+  <script src="https://js.arcgis.com/4.3/"></script>
+  <!-- Terraformer reference -->
+  <script src="./vendor/terraformer/terraformer.min.js"></script>
+  <script src="./vendor/terraformer-arcgis-parser/terraformer-arcgis-parser.min.js"></script>
+
+  <script>
+     
+    require
+    ([
+        "esri/Map",
+        "esri/views/MapView",
+       "./src/geojsonlayer.js",
+        "dojo/on",
+        "dojo/dom",
+        "esri/request",
+        "dojo/domReady!"
+     ], 
+     
+     function
+     (
+        Map,
+        MapView,
+       GeoJsonLayer, 
+        on, 
+        dom,
+        esriRequest
+     ) 
+    
+ {
+      var map = new Map       // Create the map
+      ({
+        basemap: "gray"
+      });
+
+      var view = new MapView      // Create the MapView
+      ({
+        container: "viewDiv",
+        map: map,
+        center: [-73.950, 40.702],
+        zoom: 3
+      });
+        
+ //});
+    
+      map.on("load", function () 
+      {
+         addGeoJsonLayer("./KK/InternationalStudentCount.json");  //addGeoJsonLayer("./data/dc-school-zones.json");  
+       //"visibility": true,
+        //"opacity": 1,
+      });
+        map.addLayer(geoJsonLayer);
+     
+     });
+  </script>
+</head>
+    
+    <body >
+        
+    <script type = "text/javascript">
+      /* 
+        map.on("load", function () 
+      {
+         addGeoJsonLayer("./KK/InternationalStudentCount.json");
+         "visibility": true,
+         "opacity": 1,
+      });
+        map.addLayer(geoJsonLayer);
+     
+      */
+        /*
+             // The function called every time a radio button is pressed to switch between data years
+            function displayData() 
+            {
+                var radioYears = document.getElementsByName('datayear'); //Returns the parameters of the radio button toolbar
+            // Searches radio button values, then stops loop if "Checked" = true
+            // Returns the academic year to be used in data rendering
+            for(var b = 0; b< radioYears.length; b++)
+            {
+                if(radioYears[b].checked)
+                {
+                    dataset = radioYears[b].value;
+                    break;
+                }
+             }
+           };
+      */
+        </script>
+
+       <div id="viewDiv"></div>
+        <!-- Div containing Radio Buttons - Use to switch between academic years -->
+    <!-- 2013 is the default (see "Checked") - onclick fires the function "displayData" in js -->
+        <div class="radioContainer">
+            <h2>Academic Year:</h2>
+            <ul>
+            <li>   
+                <input type="radio" id="2013" onclick="displayData();" name="datayear" value=2013 checked="checked">
+                <label for="2013">2013</label>
+            <div class="check"></div>
+            </li>
+            <li>
+                <input type="radio" id="2014" onclick="displayData();" name="datayear" value=2014>
+                <label for="2014">2014</label>
+                <div class="check"></div>
+            </li>
+            <li>  
+                <input type="radio" id="2015" onclick="displayData();" name="datayear" value=2015>
+                <label for="2015">2015</label>
+            <div class="check"></div>
+            </li> 
+            </ul>
+        </div>
+    </body>
+</html>

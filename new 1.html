@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <!-- Use correct character set. -->
+    <meta charset="utf-8">
+
+    <!-- Tell IE to use the latest, best version. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+    <title>ODU Geo-Vis: Intl. Students</title>
+    
+    <!-- Cesiumjs Library -->
+    <script src="http://cesiumjs.org/releases/1.19/Build/Cesium/Cesium.js"></script>
+    
+    <!-- Load Bootstrapcss - Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    
+    <!-- Load Bootstrapjs - Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+    <!-- Load jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    
+    <!-- Color Scaling Script -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.1.1/chroma.min.js"></script>
+    <!-- Load Custom Style Sheet -->
+    <link name ="Stylee" rel="stylesheet" href="Stylee.css">
+      
+      
+      
+      
+    <style type="text/css">
+	
+    @import url(../templates/bucket.css);
+<div id="cesiumContainer" class="fullSize"></div>
+<div id="loadingOverlay"><h1>Loading...</h1></div>
+<div id="toolbar"></div>
+      html, body{padding: 0; margin: 0;}
+      #earth_div{top: 0; right: 0; bottom: 0; left: 0;
+                 position: absolute !important;
+                 background-image: -webkit-gradient(
+                   linear,
+                   left bottom,
+                   left top,
+                   color-stop(0, rgb(253,253,253)),
+                   color-stop(0.15, rgb(253,253,253)),
+                   color-stop(0.53, rgb(223,223,223)),
+                   color-stop(0.56, rgb(255,255,255)),
+                   color-stop(1, rgb(253,253,253))
+                   );
+                 background-image: -moz-linear-gradient(
+                   center bottom,
+                   rgb(253,253,253) 0%,
+                   rgb(253,253,253) 15%,
+                   rgb(223,223,223) 53%,
+                   rgb(255,255,255) 56%,
+                   rgb(253,253,253) 100%
+                   );
+      }
+    </style>
+      
+      <!-- Load Geovis Logo for Web Page Tab -->
+    <link rel="icon" type="image/png" href="Geovis_v4.png" sizes="96x96">
+      
+	<script src="http://www.webglearth.com/v2/api.js"></script>
+    <script>
+      function initialize() {
+        var earth = new WE.map('earth_div');
+        earth.setView([46.8011, 8.2266], 2);
+        WE.tileLayer('http://data.webglearth.com/natural-earth-color/{z}/{x}/{y}.jpg', {
+          tileSize: 256,
+          bounds: [[-85, -180], [85, 180]],
+          minZoom: 0,
+          maxZoom: 16,
+          attribution: 'WebGLEarth example',
+          tms: true
+        }).addTo(earth);
+      }
+    </script>
+	<title>WebGL Earth API: Custom Tiles</title>
+  </head>
+    
+    <!--
+  <body onload="initialize()">
+    <div id="earth_div"></div>
+  </body>
+  var viewer = new Cesium.Viewer('cesiumContainer');
+
+//Example 1: Load with default styling.
+Sandcastle.addDefaultToolbarButton('Default styling', function() {
+    viewer.dataSources.add(Cesium.GeoJsonDataSource.load('../../SampleData/ne_10m_us_states.topojson'));
+});
+
+//Example 2: Load with basic styling options.
+Sandcastle.addToolbarButton('Basic styling', function() {
+    viewer.dataSources.add(Cesium.GeoJsonDataSource.load('../../SampleData/ne_10m_us_states.topojson', {
+        stroke: Cesium.Color.HOTPINK,
+        fill: Cesium.Color.PINK.withAlpha(0.5),
+        strokeWidth: 3
+    }));
+});
+
+//Example 3: Apply custom graphics after load.
+Sandcastle.addToolbarButton('Custom styling', function() {
+    //Seed the random number generator for repeatable results.
+    Cesium.Math.setRandomNumberSeed(0);
+
+    var promise = Cesium.GeoJsonDataSource.load('../../SampleData/ne_10m_us_states.topojson');
+    promise.then(function(dataSource) {
+        viewer.dataSources.add(dataSource);
+
+        //Get the array of entities
+        var entities = dataSource.entities.values;
+
+        var colorHash = {};
+        for (var i = 0; i < entities.length; i++) {
+            //For each entity, create a random color based on the state name.
+            //Some states have multiple entities, so we store the color in a
+            //hash so that we use the same color for the entire state.
+            var entity = entities[i];
+            var name = entity.name;
+            var color = colorHash[name];
+            if (!color) {
+                color = Cesium.Color.fromRandom({
+                    alpha : 1.0
+                });
+                colorHash[name] = color;
+            }
+			//Set the polygon material to our random color.
+            entity.polygon.material = color;
+            //Remove the outlines.
+            entity.polygon.outline = false;
+
+            //Extrude the polygon based on the state's population.  Each entity
+            //stores the properties for the GeoJSON feature it was created from
+            //Since the population is a huge number, we divide by 50.
+            entity.polygon.extrudedHeight = entity.properties.Population / 50.0;
+        }
+    }).otherwise(function(error){
+        //Display any errrors encountered while loading.
+        window.alert(error);
+    });
+});
+
+//Reset the scene when switching demos.
+Sandcastle.reset = function() {
+    viewer.dataSources.removeAll();
+
+    //Set the camera to a US centered tilted view and switch back to moving in world coordinates.
+    viewer.camera.lookAt(Cesium.Cartesian3.fromDegrees(-98.0, 40.0), new Cesium.Cartesian3(0.0, -4790000.0, 3930000.0));
+    viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+};
+            </entities.length;>
+            -->
+    <body onload="displayData();">
+
+    <!-- Div containing animated navbar -->
+     <nav class="navbar navbar-fixed-left navbar-minimal animate" role="navigation">
+		<div class="navbar-toggler animate">
+			<span class="menu-icon"></span>
+		</div>
+		<ul class="navbar-menu animate">
+			<li>
+                <!-- Logo & Link to to ODU Homepage -->
+				<a href="http://www.odu.edu/" target="_blank" class="animate">
+					<span class="desc animate">Old Dominion University</span>
+					<img src="ODUlogo.png" width="75" height="75" z-index="1000">
+				</a>
+			</li>
+            <li>
+                <!-- Logo & Link to to ODU Online Homepage -->
+				<a href="https://online.odu.edu/" target="_blank" class="animate">
+					<span class="desc animate">Old Dominion University - Distance Learning</span>
+					<img src="OduOnlineLogoedit.png" width="75" height="75" z-index="1000"> 
+				</a>
+			</li>
+			<li>
+                <!-- Logo & Link to to ODU GIS/Geovis Homepage -->
+				<a href="https://www.odu.edu/facultystaff/research/resources/computing/gis" target="_blank" class="animate">
+					<span class="desc animate">Old Dominion University - Center for Geospatial & Visualization Computing</span>
+					<img src="Geovis_v4.png" width="75" height="75" z-index="1000">
+				</a>
+			</li>
+			<li>
+                <!-- Logo & Link to to Cesium (Replaces Credit Container @ Bottom) -->
+				<a href="https://cesiumjs.org/index.html" target="_blank" class="animate">
+					<span class="desc animate">Cesium.js</span>
+					<img src="CesiumEdit.png" width="75" height="75" z-index="1000">
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+    <!-- Div containing Cesium Viewer -->
+    <div id="cesiumContainer"></div>
+    
+    <!-- Div containing Radio Buttons - Use to switch between academic years -->
+    <!-- 2013 is the default (see "Checked") - onclick fires the function "displayData" in js -->
+    <div class="radioContainer">
+        <h2>Academic Year:</h2>
+        <ul>
+        <li>   
+            <input type="radio" id="2013" onclick="displayData();" name="datayear" value=2013 checked="checked">
+            <label for="2013">2013</label>
+            <div class="check"></div>
+        </li>
+        <li>
+            <input type="radio" id="2014" onclick="displayData();" name="datayear" value=2014>
+            <label for="2014">2014</label>
+            <div class="check"></div>
+        </li>
+        <li>  
+            <input type="radio" id="2015" onclick="displayData();" name="datayear" value=2015>
+            <label for="2015">2015</label>
+            <div class="check"></div>
+        </li> 
+        </ul>
+    </div>
+    
+   
+<script type = "text/javascript">
+
+    // Uses Jquery to control the animation of the navbar
+    $('.navbar-toggler').on('click', function(event) {
+    event.preventDefault();
+    $(this).closest('.navbar-minimal').toggleClass('open');
+    })
+    
+    // Creates the Cesium Viewer Box
+    var viewer = new Cesium.Viewer('cesiumContainer', {
+        baseLayerPicker : false, //turns off the options to switch between imagery tiles
+        timeline : false, //turns off bottom timeline toolbars
+        skyAtsmophere : false, //turns off the blue glow around the globe
+        globe : false, //turns off the globe visability
+        animation : false, //turns off the clock toolbar
+        geocoder : false, //turns off the address search function
+        vrButton : true //turns on the stereoscopic view option button
+    });
+    
+    // Removes credit container at the bottom of the page (replaced in navbar)
+        viewer.cesiumWidget.creditContainer.parentElement.style.display = 'none';
+    
+    // Forces Cesium to wait before loading its preset style sheet for the info box pop up, then forces injection of style from our own .ccs sheet
+    setTimeout(function(){
+          var cssLink = document.createElement("link");
+          cssLink.href= 'Stylee.css';
+          cssLink.rel = "stylesheet";
+          cssLink.type = "text/css";
+          viewer.infoBox.frame.contentDocument.head.appendChild(cssLink);
+    },5000);
+    
+    // The function called every time a radio button is pressed to switch between data years
+    function displayData() {
+    
+        // Returns the parameters of the radio button toolbar
+        var radioYears = document.getElementsByName('datayear');
+    
+        // Searches radio button values, then stops loop if "Checked" = true
+        // Returns the academic year to be used in data rendering
+        for(var b = 0; b< radioYears.length; b++) {
+            if(radioYears[b].checked) {
+                dataset = radioYears[b].value;
+                break;
+            }
+        };
+        
+        // Removes all previously rendered data
+        viewer.dataSources.removeAll();
+            
+        // Loads Geojson polygons after the .then function is completed
+        var promise = Cesium.GeoJsonDataSource.load('InternationalStudentCount.json');
+        
+        // Sets up viewer to add datasource after .then is complete
+        promise.then(function(dataSource) {
+            viewer.dataSources.add(dataSource); 
+
+            // Get the array of entities from Geojson File
+            var entities = dataSource.entities.values;
+            
+            // Loop that goes through each entity (country polygon) in the geojson file and provides them charactaristics based on the number of students for the given academic year
+            for (var i = 0; i < entities.length; i++) {
+
+                var entity = entities[i];
+                
+                // Gets the correct student count corresponding to the chosen data year from the dataset based on the checked radio button     
+                if (dataset === '2013'){
+                    studentCnt = entity.properties.Count2013; 
+                } else if (dataset === '2014'){
+                    studentCnt = entity.properties.Count2014; 
+                } else {
+                    studentCnt = entity.properties.Count2015;
+                };
+                
+                // As height is in meters, extrusion must be multiplied by a factor in order to be noticable - set base thickness of extrusion as 50,000 m (w/ 0 students) 
+                if (studentCnt == 0) {
+                    height = 50000;
+                // Heights are relatively scaled (otherwise china & india are touching the moon)  
+                } else { 
+                    height = 75000 + ((studentCnt / 155) * 950000);
+                } 
+                
+                // Sets extrusion height
+                entity.polygon.extrudedHeight = height;
+            
+                // Loop sets onclick descriptions of individual countries
+                if (entity.properties.NAME == 'United States') {
+                    entity.description = ['The United States is home to Old Dominion University: Located in the City of Norfolk, Virginia - Old Dominion University is a dynamic public research institution that serves its students and enriches the Commonwealth of Virginia, the nation and the world through rigorous academic programs, strategic partnerships, and active civic engagement.'];
+                } else if (studentCnt === 0) {
+                    entity.description = 'There were no distance learning students from ' + entity.properties.NAME + ' attending Old Dominion University in the ' + String(dataset) + ' academic year.';
+                } else if (studentCnt ===1) {
+                    entity.description = ['There was ' + String(studentCnt) + ' distance learning student from ' + entity.properties.NAME + ' attending Old Dominion University in the ' + String(dataset) + ' academic year.'];
+                } else { 
+                    entity.description = ['There were ' + String(studentCnt) + ' distance learning students from ' + entity.properties.NAME + ' attending Old Dominion University in the ' + String(dataset) + ' academic year.'];
+                } 
+        
+                // Creates a color scale between the two chosen colors based on the domains given
+                var scale = chroma.scale(['#426a8a','#4785b8']).domain([1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150]);
+            
+                // If there are no dis students, color is grey
+                if (studentCnt === 0) { 
+                    ecolor = '#6d7378';
+                // Else, color var is set from color scale by student count
+                } else {
+                    ecolor = scale(studentCnt).hex();
+                }
+            
+                // Sets color of polygon
+                entity.polygon.material = Cesium.Color.fromCssColorString(ecolor); 
+            
+                //Remove the polygon outlines (they look terrible)
+                entity.polygon.outline = false;
+                
+            } // end of polygon attribute loop
+        }); // end of .then function --> loads json
+    }; // end of display data function
+
+</script>
+
+</body>
+</html>

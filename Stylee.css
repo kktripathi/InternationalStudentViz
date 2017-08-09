@@ -1,0 +1,550 @@
+/*
+Styling for the Cesium Infobox 
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
+
+
+
+.cesium-infoBox {
+    font-family: 'Roboto Slab', serif;
+    background-color: #808080;
+    background-color: rgba(80, 80, 80, 0.7);
+    display: block;
+    position: absolute;
+    height: auto;
+    width: auto;
+    max-width: 40%;
+    bottom: auto;
+    padding:0px 0px 0px 0px;
+    margin: 0px 10px;
+    color: steelblue;
+    border-bottom-right-radius: 7px;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    border-top-right-radius: 7px;
+    -webkit-transform: translate(100%, 0);
+    -moz-transform: translate(100%, 0);
+    transform: translate(100%, 0);
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: visibility 0s 0.2s, opacity 0.2s ease-in, -webkit-transform 0.2s ease-in;
+    -moz-transition: visibility 0s 0.2s, opacity 0.2s ease-in, -moz-transform 0.2s ease-in;
+    transition: visibility 0s 0.2s, opacity 0.2s ease-in, transform 0.2s ease-in;
+}
+
+.cesium-infoBox .cesium-infoBox-visible {
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    transform: translate(0, 0);
+    visibility: visible;
+    opacity: 0.25;
+    -webkit-transition: opacity 0.2s ease-out, -webkit-transform 0.2s ease-out;
+    -moz-transition: opacity 0.2s ease-out, -moz-transform 0.2s ease-out;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.cesium-infoBox .cesium-infoBox-title {
+    display:block;
+    position:relative;
+    height: auto;
+    bottom: auto;
+    font-family: 'Roboto Slab', serif;
+    /*color: #ffffff;*/
+        color: #99cc00;
+
+    /*font-size: 25px;*/
+    font-size: 20px;
+    font-weight: 600;
+    background-color: steelblue;
+    background-color: rgba(80, 80, 80, 0.7);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space:normal;
+    overflow:hidden;  
+}
+
+.cesium-infoBox .cesium-infoBox-bodyless .cesium-infoBox-title {
+    border-bottom-right-radius: 7px;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    border-top-right-radius: 7px;
+    height:auto;  
+}
+
+.cesium-infoBoxbutton.cesium-infoBox-camera {
+    display:block;
+    position: relative;
+    top: 4px;
+    left: 4px;
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-color: transparent;
+    border-radius: 3px;
+    padding: 0 5px;
+    margin: 0;
+}
+
+button.cesium-infoBox-close {
+    display: block;
+    position: relative;
+    top: 4px;
+    right: 4px;
+    width: auto;
+    height: auto;
+    background: transparent;
+    border: none;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0 5px;
+    color: #ffffff;
+}
+
+button.cesium-infoBox-close:focus {
+    background: rgba(238, 136, 0, 0.44);
+    outline: none;
+}
+
+button.cesium-infoBox-close:hover {
+    background: #888;
+    color: #000;
+}
+
+button.cesium-infoBox-close:active {
+    background: #a00;
+    color: #000;
+}
+
+.cesium-infoBox-bodyless .cesium-infoBox-iframe {
+    background: #888;
+}
+
+.cesium-infoBox  .cesium-infoBox-iframe {
+    display: block;
+    position: relative;
+    background-color: #808080;
+    background-color: rgba(80, 80, 80, 0.7);
+    width: 100%; /* Fallback */
+    height: auto;   
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+.cesium-infoBox-description {
+    font-family: 'Roboto Slab', serif;
+    display: block;
+    position: relative;
+    background-color: #808080;
+    background-color: transparent;
+    /*font-size: 20px;*/
+    font-size: 15px;
+    font-weight: 100;
+    padding: 6px 10px 10px 10px;
+    color: #ffffff;
+    height:auto;
+    width = 100%;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+.cesium-infoBox-description a:link,
+.cesium-infoBox-description a:visited,
+.cesium-infoBox-description a:hover,
+.cesium-infoBox-description a:active {
+    color: #ffffff;
+}
+
+.cesium-infoBox-description table {
+    color: #ffffff;
+}
+
+.cesium-infoBox-defaultTable {
+    width: 100%;
+    color: #ffffff;
+}
+
+.cesium-infoBox-defaultTable tr:nth-child(odd) {
+    background-color: rgba(84, 84, 84, 0.7);
+}
+
+.cesium-infoBox-defaultTable tr:nth-child(even) {
+    background-color: rgba(84, 84, 84, 0.25);
+}
+
+.cesium-infoBox-defaultTable th {
+    font-weight: normal;
+    padding: 0px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.cesium-infoBox-defaultTable td {
+    padding: 3px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.cesium-infoBox-description-lighter {
+    color: #000000;
+}
+
+.cesium-infoBox-description-lighter a:link,
+.cesium-infoBox-description-lighter a:visited,
+.cesium-infoBox-description-lighter a:hover,
+.cesium-infoBox-description-lighter a:active {
+    color: #000000;
+}
+
+.cesium-infoBox-description-lighter table {
+    color: #000000;
+}
+
+.cesium-infoBox-defaultTable-lighter {
+    width: 100%;
+    color: #000000;
+}
+
+.cesium-infoBox-defaultTable-lighter tr:nth-child(odd) {
+    background-color: rgba(179, 179, 179, 0.8);
+}
+
+.cesium-infoBox-defaultTable-lighter tr:nth-child(even) {
+    background-color: rgba(179, 179, 179, 0.25);
+}
+
+.cesium-infoBox-loadingContainer {
+    margin: 3px;
+    text-align: center;
+}
+
+.cesium-infoBox-loading {
+    display: inline-block;
+    background-image: url(../Images/info-loading.gif);
+    /* background-image: url(1.gif); */
+    width: 16px;
+    height: 11px;
+}
+
+/*
+Styling for the Radio Buttons
+*/
+
+.yearContainer {
+    font-family: 'Roboto Slab', serif;
+    display: block;
+    
+    background-color: rgba(80, 80, 80, 0.7);
+    position:absolute; 
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: auto;
+    width: 35px;
+    height: 30px;
+    bottom: 0px;
+    left:0px;
+    padding: 3px 0px 1px 3px; 
+
+}
+
+.yearContainer :hover{
+    color:#fff;
+    fill:#fff;
+    background:#48b;
+    border-color:#aef;
+    box-shadow:0 0 3px #fff;
+    
+}
+
+
+/*
+.yearContainer button {
+    color: steelblue;
+    font-weight: 200;
+    font-size: 1.5em;
+    margin: auto;
+    padding: 5px 0px 5px 13px; 
+     cursor: pointer;
+    
+}
+*/
+
+.radioContainer {
+    font-family: 'Roboto Slab', serif;
+    display: block;
+   
+    background-color: #808080;
+    background-color: rgba(80, 80, 80, 0.7);
+    position:absolute; 
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: auto;
+    width: 100px;
+    bottom: 33px;
+    left:0px;
+    /*bottom: 7px;
+      left:7px;*/
+    padding: 0;
+}
+
+
+
+
+.radioContainer ul {
+    list-style: none;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.radioContainer ul li {
+    color: steelblue;
+    display: block;
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 35px;
+} 
+
+ul li input[type=radio]{
+    position: absolute;
+    visibility: hidden;
+}
+
+ul li label{
+    display: block;
+    position: relative;
+    font-weight: 500;
+    font-size: 1.5em;
+    top: -20px;
+    padding: 20px 0px 0px 40px; /*year position from left and top*/
+    margin: auto;
+    height: 100%;
+    z-index: 3;
+    cursor: pointer;
+    -webkit-transition: all 0.25s linear;
+}
+
+ul li:hover label{
+	color: #FFFFFF;
+}
+
+ul li .check{
+    display: block;
+    position: absolute;
+    border: 3px solid steelblue;
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    top: 5px;
+    left: 5px; /*circles position from left*/
+    z-index: 0.5;
+    transition: border .25s linear;
+    -webkit-transition: border .25s linear;
+}
+
+ul li:hover .check {
+    border: 2px solid #FFFFFF;
+}
+
+ul li .check::before {
+    display: block;
+    position: absolute;
+    content: '';
+    border-radius: 100%;
+    height: 10px;
+    width: 10px;
+    top: 3px;
+    left: 3px;
+    margin: auto;
+    transition: background 0.25s linear;
+    -webkit-transition: background 0.25s linear;
+}
+
+input[type=radio]:checked ~ .check {
+    border: 2px solid white;
+}
+
+input[type=radio]:checked ~ .check::before{
+  background: white;
+    position: absolute;
+}
+
+input[type=radio]:checked ~ label{
+  color: white;
+}
+
+/*
+Styling for the Navbar
+*/
+
+.animate {
+		-webkit-transition: all 0.3s ease-in-out;
+		-moz-transition: all 0.3s ease-in-out;
+		-o-transition: all 0.3s ease-in-out;
+		-ms-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+	}
+
+	.navbar-fixed-left {
+		position: fixed;
+		/*top: 0px;
+         left: 0px; */
+        top: 7px;
+		left: 7px;
+		border-radius: 0px;
+	}
+
+	.navbar-minimal {
+		width: 40px;	/*width of icon*/	
+		min-height: 40px;
+		max-height: 100%;
+		background-color: rgb(51, 51, 51);
+		background-color: rgba(51, 51, 51, 0.8);
+		border-width: 0px;
+		z-index: 1000;
+	}
+
+	.navbar-minimal > .navbar-toggler {
+		position: relative;
+		min-height: 40px; /*height of icon*/
+		border-bottom: 1px solid rgb(81, 81, 81);
+		z-index: 100;
+		cursor: pointer;
+	}
+
+	.navbar-minimal.open > .navbar-toggler,
+	.navbar-minimal > .navbar-toggler:hover {
+		background-color: rgb(70, 130, 180); /*steel blue*/
+	}
+
+	.navbar-minimal > .navbar-toggler > span {
+		position: absolute;
+		top: 50%;
+		right: 50%;
+		margin: -8px -8px 0 0;
+		width: 16px;
+		height: 16px;
+		background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHdpZHRoPSIxNnB4IiBoZWlnaHQ9IjMycHgiIHZpZXdCb3g9IjAgMCAxNiAzMiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTYgMzIiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZmlsbD0iI0ZGRkZGRiIgZD0iTTEsN2gxNGMwLjU1MiwwLDEsMC40NDgsMSwxcy0wLjQ0OCwxLTEsMUgxQzAuNDQ4LDksMCw4LjU1MiwwLDgKCVMwLjQ0OCw3LDEsN3oiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNGRkZGRkYiIGQ9Ik0xLDEyaDE0YzAuNTUyLDAsMSwwLjQ0OCwxLDFzLTAuNDQ4LDEtMSwxSDFjLTAuNTUyLDAtMS0wLjQ0OC0xLTEKCVMwLjQ0OCwxMiwxLDEyeiIvPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZmlsbD0iI0ZGRkZGRiIgZD0iTTEsMmgxNGMwLjU1MiwwLDEsMC40NDgsMSwxcy0wLjQ0OCwxLTEsMUgxQzAuNDQ4LDQsMCwzLjU1MiwwLDMKCVMwLjQ0OCwyLDEsMnoiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNGRkZGRkYiIGQ9Ik0xLjMzLDI4Ljk3bDExLjY0LTExLjY0YzAuNDU5LTAuNDU5LDEuMjA0LTAuNDU5LDEuNjYzLDAKCWMwLjQ1OSwwLjQ1OSwwLjQ1OSwxLjIwNCwwLDEuNjYzTDIuOTkzLDMwLjYzM2MtMC40NTksMC40NTktMS4yMDQsMC40NTktMS42NjMsMEMwLjg3MSwzMC4xNzQsMC44NzEsMjkuNDMsMS4zMywyOC45N3oiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNGRkZGRkYiIGQ9Ik0yLjk5MywxNy4zM2wxMS42NDEsMTEuNjRjMC40NTksMC40NTksMC40NTksMS4yMDQsMCwxLjY2MwoJcy0xLjIwNCwwLjQ1OS0xLjY2MywwTDEuMzMsMTguOTkzYy0wLjQ1OS0wLjQ1OS0wLjQ1OS0xLjIwNCwwLTEuNjYzQzEuNzg5LDE2Ljg3MSwyLjUzNCwxNi44NzEsMi45OTMsMTcuMzN6Ii8+Cjwvc3ZnPgo=);
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		-webkit-transition: -webkit-transform .3s ease-out 0s;
+		-moz-transition: -moz-transform .3s ease-out 0s;
+		-o-transition: -moz-transform .3s ease-out 0s;
+		-ms-transition: -ms-transform .3s ease-out 0s;
+		transition: transform .3s ease-out 0s;
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		-ms-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	.navbar-minimal > .navbar-menu {
+		position: absolute;
+		top: -1000px;
+		left: 0px;
+		margin: 0px;
+		padding: 0px;
+		list-style: none;
+		z-index: 50;
+		background-color: rgb(51, 51, 51);
+		background-color: rgba(51, 51, 51, 0.8);
+	}
+	.navbar-minimal > .navbar-menu > li {
+		margin: 0px;
+		padding: 0px;
+		border-width: 0px;
+		height: 60px; /*height of bar*/
+	}
+	.navbar-minimal > .navbar-menu > li > a {
+		position: relative;
+		display: inline-block;
+		color: rgb(255, 255, 255); /*label text color*/
+		padding: 10px 10px; /*position of icons inside the bar*/
+		text-align: left;
+		cursor: pointer;
+		border-bottom: 1px solid rgb(81, 81, 81);
+		width: 100%;
+		text-decoration: none;
+		margin: 0px;
+	}
+
+	.navbar-minimal > .navbar-menu > li > a:last-child {
+		border-bottom-width: 0px;
+	}
+	.navbar-minimal > .navbar-menu > li > a:hover {
+		background-color: rgb(256,256,256);  /* color on hover */
+	}
+	.navbar-minimal > .navbar-menu > li > a > .glyphicon {
+		float: right;
+	}
+
+	.navbar-minimal.open {
+		width: 320px;
+	}
+
+	.navbar-minimal.open > .navbar-toggler > span {
+		background-position: 0 -16px;
+		-webkit-transform: rotate(-180deg);
+		-moz-transform: rotate(-180deg);
+		-o-transform: rotate(-180deg);
+		-ms-transform: rotate(-180deg);
+		transform: rotate(-180deg);
+	}
+
+	.navbar-minimal.open > .navbar-menu {
+		top: 41px; /*bar icons position from the top burger icon*/
+		width: 100%;
+		min-height: 100%;
+	}
+
+	@media (min-width: 768px) {
+		.navbar-minimal.open {
+			width: 60px; /*width of bar*/ /*if i will make it 40px, would look as slim as burger icon's size*/
+		}
+		.navbar-minimal.open > .navbar-menu {
+			overflow: visible;
+		}
+		.navbar-minimal > .navbar-menu > li > a > .desc {
+			position: absolute;
+			display: inline-block;
+			top: 50%;
+			left: 130px;
+			margin-top: -20px;
+			margin-left: 20px;
+			text-align: left;
+			white-space: nowrap;
+			padding: 10px 13px;
+			border-width: 0px !important;
+			background-color: rgb(51, 51, 51);
+			background-color: rgba(51, 51, 51, 0.8);
+			opacity: 0;
+		}
+		.navbar-minimal > .navbar-menu > li > a > .desc:after {
+			z-index: -1;
+			position: absolute;
+			top: 50%;
+			left: -10px;
+			margin-top: -10px;
+			content:'';
+			width: 0;
+			height: 0;
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid transparent; 	
+			border-right: 10px solid rgb(51, 51, 51);
+			border-right-color: rgba(51, 51, 51, 0.8);
+		}
+		.navbar-minimal > .navbar-menu > li > a:hover > .desc {
+			left: 55px; /*label distance from the bar*/
+			opacity: 1;
+		}
+    
