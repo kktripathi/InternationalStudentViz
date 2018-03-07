@@ -4,4 +4,5 @@ Project link: https://kktripathi.github.io/ODUOnlineInternationalStudentVisualiz
 
 <p align="center">
   <img src="readme.png" width="350"/>
+  <img src="application-screenshot.png" width="550"/>
 </p>
